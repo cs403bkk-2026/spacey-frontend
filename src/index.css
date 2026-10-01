@@ -1,0 +1,122 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", -apple-system, system-ui, "Helvetica Neue", sans-serif;
+  --color-ink: #222222;
+  --color-body: #3f3f3f;
+  --color-muted: #6a6a6a;
+  --color-muted-soft: #929292;
+  --color-hairline: #dddddd;
+  --color-hairline-soft: #ebebeb;
+  --color-border-strong: #c1c1c1;
+  --color-canvas: #ffffff;
+  --color-surface-soft: #f7f7f7;
+  --color-surface-strong: #f2f2f2;
+  --color-error: #c13515;
+  --color-on-primary: #ffffff;
+  --shadow-card: rgba(0, 0, 0, 0.02) 0px 0px 0px 1px, rgba(0, 0, 0, 0.04) 0px 2px 6px 0px,
+    rgba(0, 0, 0, 0.1) 0px 4px 8px 0px;
+  --radius-card: 14px;
+  --breakpoint-tablet: 46.5rem;
+  --breakpoint-desktop: 70.5rem;
+  --breakpoint-wide: 90rem;
+}
+
+body {
+  background: var(--color-canvas);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+}
+
+summary {
+  list-style: none;
+}
+
+summary::-webkit-details-marker {
+  display: none;
+}
+
+.spacy-calendar.rdp-root {
+  --rdp-accent-color: #222222;
+  --rdp-accent-background-color: #f7f7f7;
+  --rdp-day-height: 40px;
+  --rdp-day-width: 40px;
+  --rdp-day_button-height: 40px;
+  --rdp-day_button-width: 40px;
+  --rdp-day_button-border: 1px solid transparent;
+  --rdp-selected-border: 1px solid transparent;
+  --rdp-today-color: #222222;
+  --rdp-outside-opacity: 0.45;
+  --rdp-weekday-opacity: 1;
+  --rdp-nav_button-height: 32px;
+  --rdp-nav_button-width: 32px;
+  --rdp-nav-height: 40px;
+  --rdp-range_middle-background-color: #f7f7f7;
+  --rdp-range_middle-color: #222222;
+  --rdp-range_start-date-background-color: #222222;
+  --rdp-range_end-date-background-color: #222222;
+  color: #222222;
+  font-size: 14px;
+}
+
+.spacy-calendar .rdp-month_caption,
+.spacy-calendar .rdp-caption_label {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.spacy-calendar .rdp-weekday {
+  font-size: 12px;
+  font-weight: 500;
+  color: #6a6a6a;
+}
+
+.spacy-calendar .rdp-selected {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.spacy-calendar .rdp-chevron {
+  fill: #222222;
+}
+
+.spacy-calendar .rdp-selected .rdp-day_button {
+  background-color: #222222;
+  color: #ffffff;
+  border: 1px solid transparent;
+}
+
+.spacy-calendar .rdp-day_button:focus,
+.spacy-calendar .rdp-day_button:focus-visible,
+.spacy-calendar .rdp-button_previous:focus,
+.spacy-calendar .rdp-button_previous:focus-visible,
+.spacy-calendar .rdp-button_next:focus,
+.spacy-calendar .rdp-button_next:focus-visible {
+  outline: none;
+}
+
+.spacy-calendar .rdp-day_button:hover:not(:disabled) {
+  background-color: #f7f7f7;
+}
+
+.spacy-calendar .rdp-selected .rdp-day_button:hover {
+  background-color: #222222;
+  color: #ffffff;
+}
+
+.spacy-calendar .rdp-today:not(.rdp-selected) .rdp-day_button {
+  border-color: #222222;
+}
+
+.spacy-calendar.rdp-root[data-nav-layout="around"] .rdp-button_previous,
+.spacy-calendar.rdp-root[data-nav-layout="around"] .rdp-button_next {
+  top: 4px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+}
+
+.spacy-calendar .rdp-button_previous:hover,
+.spacy-calendar .rdp-button_next:hover {
+  background-color: #f7f7f7;
+}
