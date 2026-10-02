@@ -14,7 +14,7 @@ export function useLoginMutation() {
       return data;
     },
     onSuccess: (user) => {
-      setAuth({ user, token: null });
+      setAuth(user);
     },
   });
 }

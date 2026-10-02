@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 import { Link, useLocation } from "react-router";
 
+import { pathnameWithinApp } from "@/lib/app-path";
 import { cn } from "@/lib/utils";
 
 function isActive(pathname: string, href: string) {
@@ -18,7 +19,7 @@ export function NavLink({
   className?: string;
 }) {
   const { pathname } = useLocation();
-  const active = isActive(pathname, href);
+  const active = isActive(pathnameWithinApp(pathname), href);
 
   return (
     <Link

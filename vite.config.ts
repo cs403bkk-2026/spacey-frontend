@@ -3,6 +3,8 @@ import { fileURLToPath } from "node:url";
 import tailwindcss from "@tailwindcss/vite";
 import { defineConfig, loadEnv } from "vite";
 
+import { appBasename } from "./src/lib/app-path.ts";
+
 const rootDir = path.dirname(fileURLToPath(import.meta.url));
 
 export default defineConfig(({ mode }) => {
@@ -10,6 +12,7 @@ export default defineConfig(({ mode }) => {
   const apiTarget = env.VITE_API_BASE_URL || "https://spacey.cs403bkk26.space";
 
   return {
+    base: `${appBasename}/`,
     plugins: [tailwindcss()],
     resolve: {
       alias: {

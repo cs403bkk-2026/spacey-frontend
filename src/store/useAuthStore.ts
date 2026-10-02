@@ -7,18 +7,16 @@ const STORAGE_KEY = "spacy-auth";
 
 type AuthSnapshot = {
   user: User | null;
-  token: string | null;
   isAuthenticated: boolean;
 };
 
 type AuthState = AuthSnapshot & {
-  setAuth: (payload: { user: User; token?: string | null }) => void;
+  setAuth: (user: User) => void;
   logout: () => void;
 };
 
 const emptyAuth: AuthSnapshot = {
   user: null,
-  token: null,
   isAuthenticated: false,
 };
 
@@ -35,7 +33,6 @@ function readStoredAuth(): AuthSnapshot {
     }
     return {
       user,
-      token: typeof parsed.state?.token === "string" ? parsed.state.token : null,
       isAuthenticated: true,
     };
   } catch {
@@ -47,10 +44,9 @@ export const useAuthStore = create<AuthState>()(
   persist(
     (set) => ({
       ...readStoredAuth(),
-      setAuth: ({ user, token = null }) =>
+      setAuth: (user) =>
         set({
           user,
-          token,
           isAuthenticated: true,
         }),
       logout: () => set(emptyAuth),
@@ -59,7 +55,6 @@ export const useAuthStore = create<AuthState>()(
       name: STORAGE_KEY,
       partialize: (state) => ({
         user: state.user,
-        token: state.token,
         isAuthenticated: state.isAuthenticated,
       }),
     },

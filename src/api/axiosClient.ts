@@ -1,16 +1,17 @@
 import axios, { type AxiosError } from "axios";
 
+import { appBasename } from "@/lib/app-path";
 import { useAuthStore } from "@/store/useAuthStore";
 
-const configuredBaseUrl =
-  import.meta.env.VITE_API_BASE_URL || "https://spacey.cs403bkk26.space";
-
 /**
- * In development the Vite server proxies `/api` to VITE_API_BASE_URL.
- * The Spacey API authenticates with an HttpOnly session cookie and does not
- * send CORS headers, so the browser has to call it as a same-origin path.
+ * Development calls go through the Vite proxy at `/api`, which forwards to
+ * VITE_API_BASE_URL. Production calls are origin-relative (`/spaces`, `/login`)
+ * so the session cookie is sent to Spacey on the same host. Traefik only sends
+ * `/app` to this container, so those API paths stay on Spacey.
  */
-export const apiBaseURL = import.meta.env.DEV ? "/api" : configuredBaseUrl;
+export const apiBaseURL = import.meta.env.DEV ? "/api" : "";
+
+const loginPath = `${appBasename}/login`;
 
 export const axiosClient = axios.create({
   baseURL: apiBaseURL,
@@ -18,14 +19,6 @@ export const axiosClient = axios.create({
   headers: {
     Accept: "application/json",
   },
-});
-
-axiosClient.interceptors.request.use((config) => {
-  const token = useAuthStore.getState().token;
-  if (token) {
-    config.headers.set("Authorization", `Bearer ${token}`);
-  }
-  return config;
 });
 
 axiosClient.interceptors.response.use(
@@ -37,8 +30,8 @@ axiosClient.interceptors.response.use(
 
     if (status === 401 && !isCredentialAttempt) {
       useAuthStore.getState().logout();
-      if (!window.location.pathname.startsWith("/login")) {
-        window.location.assign("/login");
+      if (!window.location.pathname.startsWith(loginPath)) {
+        window.location.assign(loginPath);
       }
     }
 
