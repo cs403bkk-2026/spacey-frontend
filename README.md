@@ -16,14 +16,15 @@ handed over.
 
 ## Deployment (proposal under review, see #202)
 
-| | |
-| --- | --- |
-| Image | `ghcr.io/cs403bkk-2026/spacey-frontend:<commit sha>`, built by CI on every push to `main` |
-| Deployment target | Nomad job `spacey-frontend`, namespace `frontend`, course cluster |
-| Public path | `https://spacey.cs403bkk26.space/app/`. Traefik strips `/app` and forwards to the container; bare `/app` gets a 301 to `/app/` |
-| CI credentials | Repository secrets `NOMAD_ADDR` and `NOMAD_TOKEN`. The token can deploy, read and fetch logs in `frontend` and nothing else |
+|                   |                                                                                                                                |
+| ----------------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| Image             | `ghcr.io/cs403bkk-2026/spacey-frontend:<commit sha>`, built by CI on every push to `main`                                      |
+| Deployment target | Nomad job `spacey-frontend`, namespace `frontend`, course cluster                                                              |
+| Public path       | `https://spacey.cs403bkk26.space/app/`. Traefik strips `/app` and forwards to the container; bare `/app` gets a 301 to `/app/` |
+| CI credentials    | Repository secrets `NOMAD_ADDR` and `NOMAD_TOKEN`. The token can deploy, read and fetch logs in `frontend` and nothing else    |
 
 **What the application must provide**
+
 - `npm test` and `npm run build` (CI runs `npm ci`, `npm test`, `npm run build`).
 - A `Dockerfile` whose image serves the built files over HTTP on port **8080** at `/`, returns 200
   for `GET /`, and does not run the Vite development server.
