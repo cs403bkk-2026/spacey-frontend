@@ -4,12 +4,13 @@ import { appBasename } from "@/lib/app-path";
 import { useAuthStore } from "@/store/useAuthStore";
 
 /**
- * Development calls go through the Vite proxy at `/api`, which forwards to
- * VITE_API_BASE_URL. Production calls are origin-relative (`/spaces`, `/login`)
- * so the session cookie is sent to Spacey on the same host. Traefik only sends
- * `/app` to this container, so those API paths stay on Spacey.
+ * Paths are Spacey's own routes (`/spaces`, `/login`) with no `/api` prefix.
+ * In development, Vite forwards those paths to VITE_API_BASE_URL. Production
+ * calls are origin-relative so the session cookie is sent to Spacey on the
+ * same host. Traefik only sends `/app` to this container, so those API paths
+ * stay on Spacey.
  */
-export const apiBaseURL = import.meta.env.DEV ? "/api" : "";
+export const apiBaseURL = "";
 
 const loginPath = `${appBasename}/login`;
 
