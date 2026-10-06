@@ -14,6 +14,11 @@ work is tracked in [cs403bkk-2026/spacey#201](https://github.com/cs403bkk-2026/s
 The deployment, logs and rollback procedure will go in this README once the deployment path is
 handed over.
 
+## Architecture decisions
+
+- [ADR 0001: Serve the frontend at the root and the API under /api](docs/adr/0001-serve-frontend-at-root.md)
+  — proposed follow-up after backend HTML cleanup; the current `/app/` setup below remains unchanged.
+
 ## Deployment (proposal under review, see #202)
 
 |                   |                                                                                                                                |
